@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Helmy Fouad — Motion Graphics & Video Editing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2EBE7;
+  --ink:#262626;
+  --muted:#61585B;
+  --accent:#CF3147;
+  --burgundy:#591F28;
+  --card:#FFFFFF;
+  --card-border:#E2D6D0;
+  --line:#DBD0C9;
+  --on-accent:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px)
+}
+#particles-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;margin:0;line-height:1.05;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;padding:20px 0}
+.brand-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--burgundy);box-shadow:0 2px 8px rgba(89,31,40,0.25)}
+.brand-title{font-family:"Bricolage Grotesque",sans-serif;font-size:22px;font-weight:800;color:var(--burgundy);letter-spacing:-0.02em}
+nav{display:flex;gap:22px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-weight:500;transition:color .2s}
+nav a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center;padding:56px 0 72px}
+.hero h1{font-size:clamp(48px,9vw,104px);font-weight:800;color:var(--burgundy)}
+.hero p{max-width:46ch;color:var(--muted);font-size:19px;margin:22px 0 30px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--ink);cursor:pointer;font:500 16px "DM Sans",sans-serif;background:transparent;color:var(--ink);transition:all .2s}
+.btn.main{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:0 4px 20px rgba(207,49,71,0.35)}
+.btn.main:hover{background:var(--burgundy);border-color:var(--burgundy);transform:translateY(-2px)}
+.stage{aspect-ratio:1;display:grid;place-items:center}
+.morph{width:64%;aspect-ratio:1;background:var(--accent);animation:morph 7s ease-in-out infinite;box-shadow:0 10px 40px rgba(207,49,71,0.25)}
+.about{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:64px;align-items:center}
+.me-container{position:relative;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:4px solid var(--burgundy);box-shadow:0 12px 30px rgba(89,31,40,0.35);background:#000}
+.me{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;border-radius:50%;transform:scale(1.0)}
+.about p{max-width:54ch;margin:16px 0 0;color:var(--muted)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tools span{padding:6px 14px;border-radius:999px;border:1.5px solid var(--card-border);background:var(--card);font-size:15px;color:var(--ink)}
+@keyframes morph{
+0%{border-radius:50%;transform:rotate(0);background:var(--accent)}
+33%{border-radius:12%;transform:rotate(90deg);background:var(--burgundy)}
+66%{border-radius:50% 50% 12% 12%;transform:rotate(180deg);background:var(--ink)}
+100%{border-radius:50%;transform:rotate(360deg);background:var(--accent)}}
+section{padding:64px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(32px,5vw,52px);font-weight:700;color:var(--burgundy)}
+.sub{color:var(--muted);max-width:56ch;margin:12px 0 0}
+
+.reasons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:36px}
+.reason-card{background:var(--card);border:1px solid var(--card-border);padding:28px 22px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.02);transition:transform .2s, border-color .2s}
+.reason-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.reason-icon{font-size:32px;margin-bottom:12px;display:inline-block}
+.reason-card h3{font-size:20px;color:var(--burgundy);margin-bottom:8px}
+.reason-card p{font-size:15px;color:var(--muted);margin:0;line-height:1.5}
+
+.bar{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.chip{padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);font:500 15px "DM Sans",sans-serif;cursor:pointer;transition:all .2s}
+.chip[aria-pressed="true"]{background:var(--burgundy);color:var(--on-accent);border-color:var(--burgundy)}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font-size:20px;cursor:pointer;transition:all .2s}
+.arrows button:hover{background:var(--accent);color:#FFF;border-color:var(--accent)}
+.reel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 20px;margin:0 -24px;scrollbar-width:thin}
+.work{flex:0 0 min(420px,82%);scroll-snap-align:start;text-decoration:none;display:block;background:var(--card);padding:16px;border-radius:16px;border:1px solid var(--card-border);box-shadow:0 4px 16px rgba(0,0,0,0.03);transition:transform .2s}
+.work:hover{transform:translateY(-4px);border-color:var(--accent)}
+.thumb{aspect-ratio:16/9;position:relative;overflow:hidden;border-radius:10px;background:linear-gradient(135deg, var(--burgundy), var(--ink));display:grid;place-items:center}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb-placeholder{color:rgba(255,255,255,0.8);font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:18px;text-align:center;padding:0 16px}
+.play{position:absolute;right:12px;bottom:12px;width:40px;height:40px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#FFF;font-size:14px;box-shadow:0 4px 12px rgba(207,49,71,0.4)}
+.work h3{font-size:22px;margin:14px 0 2px;color:var(--ink)}
+.work span{color:var(--muted);font-size:15px}
+.empty{color:var(--muted);padding:24px 0}
+.back{display:inline-block;margin:32px 0 20px;font-weight:500;text-decoration:none;color:var(--accent)}
+#gallery h2{font-size:clamp(36px,6vw,64px);font-weight:800;color:var(--burgundy)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:32px 24px;margin:32px 0 48px}
+.frame{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000;border:1px solid var(--card-border)}
+.frame iframe,.frame video{width:100%;height:100%;border:0;display:block}
+.vid h3{font-size:22px;margin:12px 0 2px}
+.vid span{color:var(--muted);font-size:15px}
+.prices{margin-top:28px;max-width:760px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 24px;align-items:center;padding:20px;border:1px solid var(--card-border);border-radius:12px;background:var(--card);margin-bottom:12px;text-decoration:none;color:inherit;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,0.02);cursor:pointer}
+.row:hover{border-color:var(--accent);transform:translateX(4px)}
+.row h3{font-size:22px;color:var(--burgundy)}
+.row p{grid-column:1;margin:4px 0 0;color:var(--muted);font-size:15px}
+.row .amt{grid-column:2;grid-row:1 / span 2;color:var(--accent)}
+.amt{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:28px;text-align:right;white-space:nowrap;line-height:1.1}
+.amt small{display:block;font:400 14px "DM Sans",sans-serif;color:var(--muted)}
+
+.social-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.social-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--card);border:1px solid var(--card-border);text-decoration:none;font-size:14px;font-weight:600;color:var(--ink);transition:all .2s}
+.social-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.contact-note{background:rgba(207,49,71,0.08);border:1px solid var(--accent);padding:16px 20px;border-radius:12px;margin-top:20px;max-width:760px}
+.contact-note p{margin:0;font-size:15px;color:var(--burgundy);font-weight:500}
+
+.payments-box{margin-top:24px;padding:18px 22px;border-radius:14px;background:var(--card);border:1.5px solid var(--card-border);box-shadow:0 4px 16px rgba(0,0,0,0.02);max-width:760px}
+.payments-box h4{margin:0 0 12px 0;font-size:18px;color:var(--burgundy);display:flex;align-items:center;gap:8px}
+.payment-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pay-item{padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line);cursor:pointer;transition:border-color .2s;position:relative}
+.pay-item:hover{border-color:var(--accent)}
+.pay-item strong{display:block;font-size:15px;color:var(--ink);margin-bottom:4px}
+.pay-item span{font-family:monospace,sans-serif;font-size:16px;color:var(--accent);font-weight:700}
+.copy-badge{position:absolute;right:12px;top:12px;font-size:12px;background:var(--accent);color:#FFF;padding:2px 8px;border-radius:999px;opacity:0;transition:opacity .2s}
+.pay-item.copied .copy-badge{opacity:1}
+
+.wa-btn{margin-top:16px;background:#25D366;border-color:#25D366;color:#000;font-weight:700}
+footer{padding:32px 0 48px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+<div class="wrap">
+<header>
+  <a class="brand-logo" href="#home" aria-label="motionhelmy">
+    <img class="logo-img" src="https://drive.google.com/thumbnail?id=1lzsFH8YqnmPW7yqSTAnQ3XSJj5eF754E&sz=w1000" alt="Helmy Fouad">
+    <span class="brand-title">motionhelmy</span>
+  </a>
+  <nav aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#why">Why Me</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div id="home">
+<div class="hero">
+<div>
+<h1>Helmy Fouad</h1>
+<p>Motion graphics designer and video editor. I turn ideas into moving pictures for brands, creators and stories.</p>
+<div class="btns"><a class="btn main" href="#work">See my work</a><a class="btn" href="#contact">Order a project</a></div>
+<div class="social-links" id="heroSocials"></div>
+</div>
+<div class="stage" aria-hidden="true"><div class="morph"></div></div>
+</div>
+
+<section id="work">
+<div class="bar">
+<div><h2>Selected work</h2><p class="sub">Scroll sideways or use the arrows. Select a project to see all videos in its category.</p>
+<div class="chips" id="chips" role="group" aria-label="Filter by type"></div></div>
+<div class="arrows"><button id="prev" aria-label="Previous">&#8592;</button><button id="next" aria-label="Next">&#8594;</button></div>
+</div>
+<div class="reel" id="reel" tabindex="0" aria-label="Work reel"></div>
+</section>
+
+<section id="why">
+<h2>Why Work With Me?</h2>
+<p class="sub">I don't just edit videos; I craft visual experiences that capture attention and drive results.</p>
+<div class="reasons-grid">
+  <div class="reason-card">
+    <span class="reason-icon">🎬</span>
+    <h3>Visual Storytelling</h3>
+    <p>Turning raw video footage and ideas into structured, engaging stories that hook viewers from the very first second.</p>
+  </div>
+  <div class="reason-card">
+    <span class="reason-icon">📈</span>
+    <h3>High Retention Editing</h3>
+    <p>Using dynamic pacing, sound design, motion graphics, and clean cuts to keep your audience watching until the end.</p>
+  </div>
+  <div class="reason-card">
+    <span class="reason-icon">✨</span>
+    <h3>Custom Motion Graphics</h3>
+    <p>From animated logos to 2D character rigging and UI animations, adding premium visual polish that builds brand trust.</p>
+  </div>
+  <div class="reason-card">
+    <span class="reason-icon">🚀</span>
+    <h3>Fast & Reliable Delivery</h3>
+    <p>Clear communication, structured feedback, and strict adherence to project deadlines every single time.</p>
+  </div>
+</div>
+</section>
+
+<section id="about">
+<div class="about">
+<div class="me-container">
+  <img class="me" id="me" alt="Helmy Fouad" src="https://drive.google.com/thumbnail?id=1lzsFH8YqnmPW7yqSTAnQ3XSJj5eF754E&sz=w1000">
+</div>
+<div>
+<h2>Hi, I'm Helmy</h2>
+<p>I'm based in Giza, Egypt. I animate and edit videos for brands and creators, from logo animations to 2D characters that walk, run and show emotion.</p>
+<div class="tools" aria-label="Tools I use"><span>After Effects</span><span>Premiere Pro</span><span>Photoshop</span><span>Illustrator</span><span>Moho</span><span>DaVinci Resolve</span></div>
+</div>
+</div>
+</section>
+
+<section id="services">
+<h2>Services and prices</h2>
+<p class="sub">Click on any service below to order directly via WhatsApp.</p>
+<div class="prices">
+<a class="row" href="https://wa.me/201029069295?text=Hello%20Helmy,%20I'm%20interested%20in%20Motion%20graphics%20video%20service" target="_blank" rel="noopener">
+  <h3>Motion graphics video</h3>
+  <p>Logo stings, explainers and social promos.</p>
+  <div class="amt">2,000 EGP<small>per minute</small></div>
+</a>
+<a class="row" href="https://wa.me/201029069295?text=Hello%20Helmy,%20I'm%20interested%20in%20Video%20montage%20service" target="_blank" rel="noopener">
+  <h3>Video montage</h3>
+  <p>Clean, paced edits for ads and reels.</p>
+  <div class="amt">1,000 EGP<small>per 30 seconds</small></div>
+</a>
+<a class="row" href="https://wa.me/201029069295?text=Hello%20Helmy,%20I'm%20interested%20in%20YouTube%20video%20editing%20service" target="_blank" rel="noopener">
+  <h3>YouTube video editing</h3>
+  <p>Full edits for YouTube creators.</p>
+  <div class="amt">200 EGP<small>per minute</small></div>
+</a>
+</div>
+
+<div class="payments-box">
+  <h4>💳 Payment Details (وسائل الدفع - انقر للنسخ)</h4>
+  <div class="payment-methods">
+    <div class="pay-item" id="payInsta" onclick="copyPay('01152536240', 'payInsta')">
+      <strong>InstaPay (انستا باي)</strong>
+      <span>01152536240</span>
+      <span class="copy-badge">Copied!</span>
+    </div>
+    <div class="pay-item" id="payPal" onclick="copyPay('motionhelmy2002@gmail.com', 'payPal')">
+      <strong>PayPal (بايبال)</strong>
+      <span>motionhelmy2002@gmail.com</span>
+      <span class="copy-badge">Copied!</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Order on WhatsApp</h2>
+<p class="sub">Primary communication and order discussions happen via WhatsApp for fast responses and file sharing.</p>
+<div class="contact-note">
+  <p>📱 <strong>طريقة التواصل الأساسية:</strong> يرجى التواصل المباشر عبر الواتساب على الرقم <strong>01029069295</strong> لمناقشة التفاصيل وبدء المشروع.</p>
+</div>
+<a class="btn wa-btn wa" href="https://wa.me/201029069295" target="_blank" rel="noopener">Chat on WhatsApp (01029069295)</a>
+<div class="social-links" id="contactSocials" style="margin-top:24px;"></div>
+</section>
+</div>
+
+<div id="gallery" hidden>
+<a class="back" href="#work">&#8592; Back to work</a>
+<h2 id="gtitle"></h2>
+<div class="vgrid" id="vids"></div>
+</div>
+
+<footer>&copy; 2026 Helmy Fouad</footer>
+</div>
+
+<script>
+// Particles Background & Click Burst System
+(function(){
+  var canvas = document.getElementById("particles-canvas");
+  var ctx = canvas.getContext("2d");
+  var particles = [];
+  var bursts = [];
+  var particleCount = 45;
+  var colors = ["#CF3147", "#591F28", "#262626"];
+
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  for(var i = 0; i < particleCount; i++){
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8,
+      radius: Math.random() * 2.5 + 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * 0.4 + 0.2
+    });
+  }
+
+  function createBurst(x, y){
+    for(var i = 0; i < 20; i++){
+      var angle = Math.random() * Math.PI * 2;
+      var speed = Math.random() * 4 + 1.5;
+      bursts.push({
+        x: x,
+        y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        radius: Math.random() * 3 + 1.5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 1.0,
+        decay: Math.random() * 0.03 + 0.02
+      });
+    }
+  }
+
+  window.addEventListener("click", function(e){
+    createBurst(e.clientX, e.clientY);
+  });
+
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for(var i = 0; i < particles.length; i++){
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if(p.x < 0) p.x = canvas.width;
+      if(p.x > canvas.width) p.x = 0;
+      if(p.y < 0) p.y = canvas.height;
+      if(p.y > canvas.height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+
+      for(var j = i + 1; j < particles.length; j++){
+        var p2 = particles[j];
+        var dx = p.x - p2.x;
+        var dy = p.y - p2.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if(dist < 110){
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = p.color;
+          ctx.globalAlpha = (1 - dist / 110) * 0.15;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    for(var k = bursts.length - 1; k >= 0; k--){
+      var b = bursts[k];
+      b.x += b.vx;
+      b.y += b.vy;
+      b.life -= b.decay;
+
+      if(b.life <= 0){
+        bursts.splice(k, 1);
+        continue;
+      }
+
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+      ctx.fillStyle = b.color;
+      ctx.globalAlpha = b.life;
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1.0;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+
+var PHONE = "01029069295";
+var WORKS = [
+ {title:"مونتاج ريلز 1", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/16nJ-G46KtpIh5ZmRPzsWocMZygNRxqPr/view?usp=drive_link", thumb:""},
+ {title:"مونتاج ريلز 2", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/1ZerYY0im9gvW040BOaq17TXVvTUzYJZq/view?usp=drive_link", thumb:""},
+ {title:"مونتاج ريلز 3", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/1K2SFhLVU7HGBmvYBXFMhXz-BbGDYnwUG/view?usp=drive_link", thumb:""},
+ {title:"مونتاج ريلز 4", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/1gjFU1q8nXAJmPqpFKhX7VEye75MGtY8-/view?usp=drive_link", thumb:""},
+ {title:"مونتاج ريلز 5", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/1XV1-_VIwmEYhlKilYXvaTattJh3YOPiG/view?usp=drive_link", thumb:""},
+ {title:"مونتاج ريلز 6", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/1qYFXfj_zDO8YOlcAKm9DI_XIziAhMWYT/view?usp=drive_link", thumb:""},
+ {title:"مونتاج ريلز 7", cat:"اعمال الريلز المونتاج", video:"https://drive.google.com/file/d/1jPzewVT7r8C60ILmWLdqxApJajZimesT/view?usp=drive_link", thumb:""},
+ {title:"موشن جرافيك 1", cat:"اعمال موشن جرافيك", video:"https://drive.google.com/file/d/1sAWIrSh-6z8pS_E4BLRxtqHZhCam2VPX/view?usp=drive_link", thumb:""},
+ {title:"موشن جرافيك 2", cat:"اعمال موشن جرافيك", video:"https://drive.google.com/file/d/1RBFB3p-Ty210fTdYLycO6zmaad6z3MBX/view?usp=drive_link", thumb:""},
+ {title:"موشن جرافيك 3", cat:"اعمال موشن جرافيك", video:"https://drive.google.com/file/d/17xaN9R8HxjQSkQyDNEMbDBebDhFMNbBf/view?usp=drive_link", thumb:""}
+];
+
+var CATS = {reels:"اعمال الريلز المونتاج", motion:"اعمال موشن جرافيك"};
+var reel = document.getElementById("reel"), chips = document.getElementById("chips"), cur = "All";
+
+function copyPay(text, elementId){
+  navigator.clipboard.writeText(text).then(function(){
+    var el = document.getElementById(elementId);
+    el.classList.add("copied");
+    setTimeout(function(){ el.classList.remove("copied"); }, 2000);
+  });
+}
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function slug(c){for(var k in CATS)if(CATS[k]===c)return k;return "motion"}
+
+function getDriveThumb(url){
+  if(!url) return null;
+  var m = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+  if(m && m[1]) {
+    return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w1000';
+  }
+  return null;
+}
+
+function renderThumb(w){
+  var driveImg = getDriveThumb(w.video);
+  var imgSrc = w.thumb || driveImg;
+  if(imgSrc) return '<div class="thumb"><img src="'+esc(imgSrc)+'" alt="'+esc(w.title)+'">';
+  return '<div class="thumb"><div class="thumb-placeholder">'+esc(w.title)+'</div>';
+}
+
+function player(w){
+ var u = w.video || "", m, a = ' title="'+esc(w.title)+'" allow="fullscreen" allowfullscreen loading="lazy"></iframe>';
+ if(!u) return renderThumb(w)+'</div>';
+ if(m = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/)) return '<iframe src="https://www.youtube.com/embed/'+m[1]+'"'+a;
+ if(m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)) return '<iframe src="https://player.vimeo.com/video/'+m[1]+'"'+a;
+ if(m = u.match(/drive\.google\.com\/file\/d\/([\w-]+)/)) return '<iframe src="https://drive.google.com/file/d/'+m[1]+'/preview"'+a;
+ return '<video controls playsinline preload="metadata" src="'+esc(u)+'"></video>';
+}
+function vid(w){return '<div class="vid"><div class="frame">'+player(w)+'</div><h3>'+esc(w.title)+'</h3>'+(w.video?'':'<span>Video coming soon</span>')+'</div>'}
+
+function draw(){
+ var list = WORKS.filter(function(w){return cur==="All"||w.cat===cur});
+ reel.innerHTML = list.length ? list.map(function(w){
+  return '<a class="work" href="#v='+slug(w.cat)+'">'+renderThumb(w)+(w.video?'<div class="play" aria-hidden="true">&#9654;</div>':'')+'</div><h3>'+esc(w.title)+'</h3><span>'+esc(w.cat)+'</span></a>';
+ }).join("") : '<p class="empty">No projects in this category yet.</p>';
+ reel.scrollLeft = 0;
+}
+
+var cats = ["All"]; for(var k in CATS) cats.push(CATS[k]);
+chips.innerHTML = cats.map(function(c){return '<button class="chip" aria-pressed="'+(c===cur)+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
+chips.addEventListener("click",function(e){var b = e.target.closest(".chip"); if(!b) return; cur = b.getAttribute("data-c");
+ [].forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",x===b)}); draw()});
+
+document.getElementById("prev").onclick = function(){ reel.scrollBy({left:-440, behavior:"smooth"}); };
+document.getElementById("next").onclick = function(){ reel.scrollBy({left:440, behavior:"smooth"}); };
+
+function route(){
+ var m = location.hash.match(/^#v=(\w+)$/), home = document.getElementById("home"), g = document.getElementById("gallery");
+ if(m && CATS[m[1]]){
+  var cat = CATS[m[1]], list = WORKS.filter(function(w){return w.cat===cat});
+  document.getElementById("gtitle").textContent = cat;
+  document.getElementById("vids").innerHTML = list.length ? list.map(vid).join("") : '<p class="empty">No videos in this category yet.</p>';
+  home.hidden = true; g.hidden = false; window.scrollTo(0,0);
+ }else{
+  g.hidden = true; home.hidden = false;
+  try{ var el = location.hash.length > 1 && document.querySelector(location.hash); if(el) el.scrollIntoView(); }catch(x){}
+ }
+}
+window.addEventListener("hashchange", route);
+
+draw();
+route();
+</script>
+</body>
+</html>
